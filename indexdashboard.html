@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Performance Dashboard</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styledashboard.css" />
+
+  <!-- Flatpickr CSS (Dark Theme) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+</head>
+<body>
+
+  <!-- Seitlicher Header / Sidebar -->
+  <aside class="side-header">
+    <div class="side-header__brand">
+      <span class="brand-title">HMMC-Dashboard</span>
+    </div>
+
+    <nav class="side-nav">
+      <a href="#" class="side-nav__link active">Account Settings</a>
+      <a href="#" class="side-nav__link">Dashboard Settings</a>
+      <a href="impressum.html" class="side-nav__link">Imprint</a>
+      <a href="login.html" class="side-nav__link side-nav__link--danger">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Hauptbereich -->
+  <div class="dashboard-wrapper">
+    <div class="dashboard">
+      <header>
+        <h1>Performance Dashboard</h1>
+      </header>
+
+      <!-- Filterleiste -->
+      <section class="filters" style="display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin:12px 0 8px">
+        <div>
+          <label for="startInput" style="font-size:12px;opacity:.8;display:block;margin-bottom:4px">Start</label>
+          <input id="startInput" type="text" class="flatpickr-input" />
+        </div>
+        <div>
+          <label for="endInput" style="font-size:12px;opacity:.8;display:block;margin-bottom:4px">Ende</label>
+          <input id="endInput" type="text" class="flatpickr-input" />
+        </div>
+        <button id="applyFilters" class="btn">Anwenden</button>
+        <!-- Optional: Zoom-Reset (falls gewünscht)
+        <button id="resetZoomBtn" class="btn">Zoom zurücksetzen</button>
+        -->
+      </section>
+
+      <!-- KPIs -->
+      <section class="kpi-cards">
+        <div class="card">
+          <h3>Avg Response Time</h3>
+          <p id="avgResponseTime">-</p>
+        </div>
+        <div class="card">
+          <h3>Error Rate</h3>
+          <p id="errorRate">-</p>
+        </div>
+        <div class="card">
+          <h3>Total Requests</h3>
+          <p id="totalRequests">-</p>
+        </div>
+      </section>
+
+      <!-- Charts -->
+      <section class="charts">
+        <div class="chart-container wide">
+          <h2>Response Time (ms) over time</h2>
+          <div style="height:320px">
+            <canvas id="responseTimeChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-container small">
+          <h2>Errors by Region</h2>
+          <div style="height:320px">
+            <canvas id="errorRegionChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tabelle -->
+      <section class="table-section">
+        <h2>Recent Requests</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Timestamp</th>
+              <th>Region</th>
+              <th>Status</th>
+              <th>Response Time (ms)</th>
+            </tr>
+          </thead>
+          <tbody id="requestTableBody"></tbody>
+        </table>
+      </section>
+    </div> <!-- /.dashboard -->
+  </div>   <!-- /.dashboard-wrapper -->
+
+  <footer class="page-footer">
+    © 2025 – HMMC-Dashboard
+  </footer>
+
+  <!-- Scripts: Reihenfolge ist wichtig -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/de.js"></script>
+<script src="./scriptdashboard.js"></script>
+
+</body>
+</html>
