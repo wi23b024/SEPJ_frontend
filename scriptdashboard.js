@@ -1,4 +1,31 @@
 
+/************************
+ * AUTH COOKIE CHECK
+ ************************/
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop().split(";").shift();
+  }
+  return null;
+}
+
+function requireAuth() {
+  const auth = getCookie("auth");
+  if (!auth) {
+    // Nicht eingeloggt → zurück zum Login
+    window.location.href = "login.html";
+  }
+}
+
+/************************
+ * INIT AUTH CHECK
+ ************************/
+document.addEventListener("DOMContentLoaded", function () {
+  requireAuth();
+});
+
 
 var API_URL = "http://127.0.0.1:8083/metrics";
 var DEFAULT_START = "2025-10-01T00:00:00Z";

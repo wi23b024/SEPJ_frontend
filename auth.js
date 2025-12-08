@@ -147,6 +147,9 @@ async function handleLogin(event) {
         (data && (data.message || data.msg)) || "Login erfolgreich.";
       messageEl.classList.add("success");
 
+      setAuthCookie();
+
+
       window.location.href = "indexdashboard.html";
     } else {
       messageEl.textContent =
